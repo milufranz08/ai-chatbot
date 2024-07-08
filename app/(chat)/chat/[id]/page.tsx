@@ -18,11 +18,14 @@ export async function generateMetadata({
 }: ChatPageProps): Promise<Metadata> {
   const session = await auth()
 
+  console.log({session})
+
   if (!session?.user) {
     return {}
   }
 
   const chat = await getChat(params.id, session.user.id)
+  console.log({chat})
   return {
     title: chat?.title.toString().slice(0, 50) ?? 'Chat'
   }
